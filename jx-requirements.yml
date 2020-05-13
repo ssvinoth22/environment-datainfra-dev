@@ -6,7 +6,7 @@ cluster:
   clusterName: datainfra
   devEnvApprovers:
   - ssvinoth22
-  environmentGitOwner: us-east-2
+  environmentGitOwner: ssvinoth22
   environmentGitPublic: true
   gitKind: github
   gitName: github

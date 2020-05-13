@@ -1,0 +1,67 @@
+tekton:
+{{- if eq .Requirements.webhook "prow" }}
+  enabled: true
+{{- else if eq .Requirements.webhook "lighthouse" }}
+  enabled: true
+{{- else }}
+  enabled: false
+{{- end }}
+{{- if eq .Requirements.cluster.provider "openshift" }}
+  rbac:
+    cluster: false
+  cluster:
+    crds:
+      create: false
+    resources:
+      create: false
+{{- end }}
+
+{{- if eq .Requirements.cluster.provider "openshift" }}
+jenkins-x-platform:
+  gcpreviews:
+    clusterrole:
+      enabled: false
+
+  gcactivities:
+    clusterrole:
+      enabled: false
+
+  gcpods:
+    clusterrole:
+      enabled: false
+
+  postinstalljob:
+    clusterrole:
+      enabled: false
+
+  controllerworkflow:
+    clusterrole:
+      enabled: false
+
+  controllerbuild:
+    clusterrole:
+      enabled: false
+
+  controllercommitstatus:
+    clusterrole:
+      enabled: false
+
+  controllerrole:
+    clusterrole:
+      enabled: false
+
+  controllerteam:
+    clusterrole:
+      enabled: false
+
+  heapster:
+  enabled: false
+    rbac:
+      create: false
+{{- end }}
+
+
+# Use cert-manager 0.11 CRDs/APIs with Dex
+dex:
+  certs:
+    newApi: true

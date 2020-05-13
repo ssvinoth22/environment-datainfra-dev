@@ -1,39 +1,83 @@
 autoUpdate:
   enabled: false
   schedule: ""
+bootConfigURL: https://github.com/cloudbees/cloudbees-jenkins-x-boot-config.git
 cluster:
-  clusterName: ""
-  environmentGitOwner: ""
+  clusterName: datainfra
+  devEnvApprovers:
+  - ssvinoth22
+  environmentGitOwner: us-east-2
   environmentGitPublic: true
-  project: ""
-  azure: {}
-  provider: gke
-  zone: ""
-gitops: true
+  gitKind: github
+  gitName: github
+  gitServer: https://github.com
+  namespace: jx
+  provider: eks
+  region: us-east-2
+  registry: 009670135393.dkr.ecr.us-east-2.amazonaws.com
 environments:
-  - key: dev
-  - key: staging
-  - key: production
+- ingress:
+    domain: 18.189.247.59.nip.io
+    externalDNS: false
+    ignoreLoadBalancer: true
+    namespaceSubDomain: -jx.
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: dev
+  repository: environment-datainfra-dev
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: staging
+  repository: environment-datainfra-staging
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: production
+  repository: environment-datainfra-production
+gitops: true
 ingress:
-  domain: ""
+  domain: 18.189.247.59.nip.io
   externalDNS: false
+  ignoreLoadBalancer: true
+  namespaceSubDomain: -jx.
   tls:
     email: ""
     enabled: false
     production: false
 kaniko: true
-secretStorage: vault
+repository: nexus
+secretStorage: local
 storage:
+  backup:
+    enabled: false
+    url: ""
   logs:
     enabled: true
-    url: ""
+    url: s3://datainfra-logs-f896e7b2-f45f-4632-8b8f-75204e78be55
   reports:
     enabled: true
-    url: ""
+    url: s3://datainfra-reports-a82360dc-5d7f-44bb-b78f-67871c1b8c36
   repository:
     enabled: true
-    url: ""
+    url: s3://datainfra-repository-d6c39235-4bc6-4857-b519-45e6115cff8f
+vault: {}
+velero:
+  schedule: ""
+  ttl: ""
 versionStream:
-  ref: 2.1.13+cjxd.9
+  ref: v0.0.31
   url: https://github.com/cloudbees/cloudbees-jenkins-x-versions.git
 webhook: prow

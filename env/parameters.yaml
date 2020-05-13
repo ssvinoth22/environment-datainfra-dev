@@ -1,0 +1,10 @@
+adminUser:
+  password: local:datainfra/adminUser:password
+  username: admin
+enableDocker: false
+pipelineUser:
+  email: vinoth.sivakumar@inside.ai
+  token: local:datainfra/pipelineUser:token
+  username: ssvinoth22
+prow:
+  hmacToken: local:datainfra/prow:hmacToken
